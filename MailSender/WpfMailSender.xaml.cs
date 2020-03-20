@@ -16,14 +16,17 @@ namespace MailSender
 		    {
 			    var send = new EmailSender(UserNameTextBox.Text, PasswordEdit.Password);
 			    send.Send();
-		    }
+
+                var dlg = new MessageSendCompletedDlg("Сообщение отправлено");
+                dlg.ShowDialog();
+            }
 		    catch (Exception exception)
 		    {
-			    //MessageBox.Show(error.Message, "При отправке сообщения возникла ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-			    var dlg = new MessageSendCompletedDlg(exception.Message);
-			    dlg.ShowDialog();
-		    }
-	    }
+			    //MessageBox.Show(exception.Message, "При отправке сообщения возникла ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                var dlg = new MessageSendError(exception.Message);
+                dlg.ShowDialog();
+            }
+        }
 	}
 }
 
